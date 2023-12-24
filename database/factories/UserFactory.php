@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 declare(strict_type=1);
 
 namespace Database\Factories;
@@ -14,7 +16,7 @@ use Illuminate\Support\Facades\Hash;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
-class UserFactory extends Factory
+final class UserFactory extends Factory
 {
     public function definition(): array
     {
@@ -42,7 +44,7 @@ class UserFactory extends Factory
 
     public function withPersonalTeam(callable $callback = null): static
     {
-        if (! Features::hasTeamFeatures()) {
+        if ( ! Features::hasTeamFeatures()) {
             return $this->state([]);
         }
 

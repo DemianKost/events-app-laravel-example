@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\Team;
 use App\Models\User;
 
-test('teams can be deleted', function () {
+test('teams can be deleted', function (): void {
     $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
     $user->ownedTeams()->save($team = Team::factory()->make([
@@ -11,7 +13,8 @@ test('teams can be deleted', function () {
     ]));
 
     $team->users()->attach(
-        $otherUser = User::factory()->create(), ['role' => 'test-role']
+        $otherUser = User::factory()->create(),
+        ['role' => 'test-role']
     );
 
     $response = $this->delete('/teams/'.$team->id);
@@ -20,7 +23,7 @@ test('teams can be deleted', function () {
     expect($otherUser->fresh()->teams)->toHaveCount(0);
 });
 
-test('personal teams cant be deleted', function () {
+test('personal teams cant be deleted', function (): void {
     $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
     $response = $this->delete('/teams/'.$user->currentTeam->id);

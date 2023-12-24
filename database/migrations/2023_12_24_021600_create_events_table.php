@@ -9,12 +9,20 @@ use Illuminate\Support\Facades\Schema;
 return new class () extends Migration {
     public function up(): void
     {
-        Schema::create('channels', static function (Blueprint $table): void {
+        Schema::create('events', static function (Blueprint $table): void {
             $table->ulid('id')->primary();
 
             $table->string('name');
+            $table->string('icon');
+            $table->string('parser')->nullable();
 
-            $table->foreignUlid('project_id')
+            $table->text('description');
+            $table->boolean('notify')->default(false);
+
+            $table->json('tags')->nullable();
+            $table->json('meta')->nullable();
+
+            $table->foreignUlid('channel_id')
                 ->index()
                 ->constrained()
                 ->cascadeOnDelete();
@@ -25,6 +33,6 @@ return new class () extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('channels');
+        Schema::dropIfExists('events');
     }
 };
