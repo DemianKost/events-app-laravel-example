@@ -1,23 +1,33 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
+use App\Enums\Status;
+use App\Models\Team;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Project>
  */
-class ProjectFactory extends Factory
+final class ProjectFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->company(),
+            'status' => Status::ACTIVE,
+            'team_id' => Team::factory(),
         ];
+    }
+
+    public function inactive(): ProjectFactory
+    {
+        return $this->state(
+            state: fn (array $attributes): array =>  [
+                'status' => Status::INACTIVE,
+            ],
+        );
     }
 }
