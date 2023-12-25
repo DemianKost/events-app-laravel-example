@@ -15,10 +15,12 @@ final class HandleInertiaRequests extends Middleware
     {
         return array_merge(parent::share($request), [
             'auth' => [
-                'user' => $request->user()->load(['currentTeam.projects.channels'])
-                    ? new UserResource(
-                        resource: $request->user(0)
-                    ) : null,
+                'user' => ( $request->user() ) 
+                    ? $request->user()->load(['currentTeam.projects.channels'])
+                        ? new UserResource(
+                            resource: $request->user(0)
+                        ) : null
+                    : null,
             ],
             'ziggy' => function () use ($request): array {
                 return array_merge((new Ziggy())->toArray(), [
