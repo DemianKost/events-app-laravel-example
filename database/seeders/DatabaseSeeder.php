@@ -6,6 +6,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Team;
+use App\Models\User;
+use App\Models\Project;
 
 final class DatabaseSeeder extends Seeder
 {
@@ -16,9 +19,17 @@ final class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $user = User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+        ]);
+
+        $user_team = Team::factory()->create([
+            'user_id' => $user->id
+        ]);
+
+        $project = Project::factory()->create([
+            'team_id' => $user_team->id
+        ]);
     }
 }

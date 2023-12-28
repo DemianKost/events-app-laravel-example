@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use App\Enums\Status;
+use App\Enums\Projects\Status;
 use App\Models\Team;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
