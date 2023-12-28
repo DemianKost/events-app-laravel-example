@@ -19,17 +19,6 @@ final class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        $user = User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
-
-        $user_team = Team::factory()->create([
-            'user_id' => $user->id
-        ]);
-
-        $project = Project::factory()->create([
-            'team_id' => $user_team->id
-        ]);
+        Team::factory(5)->create();
     }
 }

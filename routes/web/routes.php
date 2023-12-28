@@ -17,4 +17,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session')])->group(sta
     });
 
     Route::get('/dashboard', fn () => Inertia::render('Dashboard'))->name('dashboard');
+
+    /**
+     * Project routes
+     */
+    Route::prefix('projects')->as('projects:')->group(
+        base_path('routes/web/projects.php')
+    );
 });
