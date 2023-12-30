@@ -34,7 +34,7 @@ final class Project extends Model
         );
     }
 
-    public function channel(): HasMany
+    public function channels(): HasMany
     {
         return $this->hasMany(
             related: Channel::class,

@@ -19,6 +19,14 @@ final class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        Team::factory(5)->create();
+        $team = Team::factory()->create();
+
+        $user = User::first();
+        $user->current_team_id = $team->id;
+        $user->save();
+
+        $project = Project::factory()->create([
+            'team_id' => $team->id
+        ]);
     }
 }
