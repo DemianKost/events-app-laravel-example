@@ -1,17 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Web\Projects;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Web\Projects\IndexController;
+use App\Http\Requests\Web\Projects\StoreRequest;
+use Illuminate\Http\RedirectResponse;
+use JustSteveKing\Launchpad\Queue\DispatchableCommandBus;
+use function action;
 
-class StoreController extends Controller
+final class StoreController
 {
-    /**
-     * Handle the incoming request.
-     */
-    public function __invoke(Request $request)
+    public function __construct(
+        private readonly DispatchableCommandBus $bus,
+    ) {}
+
+    public function __invoke(StoreRequest $request): RedirectResponse
     {
-        //
+
+
+        return new RedirectResponse(
+            url: action(IndexController::class),
+        );
     }
 }
