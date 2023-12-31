@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Models\User;
-use App\Models\Team;
 use App\Http\Controllers\Web\Projects\IndexController;
 use Inertia\Testing\AssertableInertia;
 
@@ -16,12 +14,7 @@ it('will redirect if not authenticated', function (): void {
 })->group('projects');
 
 it('will load the page and component correctly', function (): void {
-    $user = User::factory()->create();
-    $team = Team::factory()->for($user)->create();
-    $user->forceFill([ 'current_team_id' => $team->getKey() ])->save();
-    $user->refresh();
-
-    $this->actingAs($user)->get(
+    $this->actingAs(createUser())->get(
         uri:  action(IndexController::class)
     )->assertStatus(
         status: 200
