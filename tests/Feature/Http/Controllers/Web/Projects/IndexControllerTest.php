@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\User;
+use App\Models\Team;
 use App\Http\Controllers\Web\Projects\IndexController;
 
 it('will redirect if not authenticated', function (): void {
@@ -14,7 +15,12 @@ it('will redirect if not authenticated', function (): void {
 })->group('projects');
 
 it('will load the page and component correctly', function (): void {
-    $this->actingAs(User::factory()->create())->get(
+    $user = User::factory()->create();
+    $team = Team::factory()->for($user)->create();
+    $user->forceFill([ 'current_team_id' => $team->getKey() ])->save();
+    $user->refresh();
+
+    $this->actingAs($user)->get(
         uri:  action(IndexController::class)
     )->assertStatus(
         status: 200

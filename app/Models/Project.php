@@ -19,7 +19,8 @@ final class Project extends Model
     protected $fillable = [
         'name',
         'status',
-        'team_id'
+        'team_id',
+        'current_team_id'
     ];
 
     protected $casts = [
