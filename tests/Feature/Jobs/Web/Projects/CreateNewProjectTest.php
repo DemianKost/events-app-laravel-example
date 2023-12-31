@@ -1,7 +1,4 @@
 <?php
 
-test('example', function () {
-    $response = $this->get('/');
+declare(strict_types=1);
 
-    $response->assertStatus(200);
-});
