@@ -24,7 +24,7 @@ final class StoreController
         $this->bus->dispatch(
             job: new CreateNewProject(
                 name: $request->string('name')->toString(),
-                team: $this->auth()->guard()->user()->current_team_id,
+                team: (string) $this->auth->guard()->user()->current_team_id,
             ),
         );
 

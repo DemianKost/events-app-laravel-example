@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Jobs\Web\Projects;
 
 use Illuminate\Bus\Queueable;
@@ -8,24 +10,28 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use JustSteveKing\Launchpad\Database\Portal;
+use App\Models\Project;
 
-class CreateNewProject implements ShouldQueue
+final class CreateNewProject implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue; 
+    use Queueable;
+    use SerializesModels;
 
-    /**
-     * Create a new job instance.
-     */
-    public function __construct()
+    public function __construct(
+        public readonly string $name,
+        public readonly string $team, 
+    ) {}
+ 
+    public function handle(Portal $database): void
     {
-        //
-    }
-
-    /**
-     * Execute the job.
-     */
-    public function handle(): void
-    {
-        //
+        $database->transaction(
+            callback: fn() => Project::query()->create([
+                'name' => $this->name,
+                'team_id' => $this->team,
+            ]),
+        );
     }
 }
