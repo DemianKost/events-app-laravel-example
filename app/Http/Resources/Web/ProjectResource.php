@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace App\Http\Resources\Web;
 
 use App\Models\Project;
-use App\Http\Resources\Web\ChannelResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @property-read Project $resource
  */
-class ProjectResource extends JsonResource
+final class ProjectResource extends JsonResource
 {
     public function toArray(Request $request): array
     {

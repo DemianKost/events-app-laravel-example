@@ -15,7 +15,8 @@ final readonly class ShowController
     public function __construct(
         private readonly ResponseFactory $response,
         private FetchProjectById $query,
-    ) {} 
+    ) {
+    }
 
     public function __invoke(Request $request, string $ulid): Response
     {

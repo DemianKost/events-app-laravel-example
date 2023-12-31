@@ -15,7 +15,7 @@ final class HandleInertiaRequests extends Middleware
     {
         return array_merge(parent::share($request), [
             'auth' => [
-                'user' => ( auth()->check() ) ? $request->user()->load(['currentTeam.projects.channels'])
+                'user' => (auth()->check()) ? $request->user()->load(['currentTeam.projects.channels'])
                         ? new UserResource(
                             resource: $request->user(0)
                         ) : null

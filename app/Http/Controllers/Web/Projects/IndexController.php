@@ -17,7 +17,8 @@ final readonly class IndexController
         private readonly Factory $auth,
         private FetchProjectsForTeam $query,
         private ResponseFactory $response,
-    ) {}
+    ) {
+    }
 
     public function __invoke(Request $request): Response
     {

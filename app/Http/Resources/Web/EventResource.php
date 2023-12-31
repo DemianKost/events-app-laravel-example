@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Resources\Web;
 
 use App\Models\Event;
@@ -9,7 +11,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * @property-read Event $resource
  */
-class EventResource extends JsonResource
+final class EventResource extends JsonResource
 {
     public function toArray(Request $request): array
     {

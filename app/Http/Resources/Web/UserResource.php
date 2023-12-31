@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Resources\Web;
 
 use App\Models\User;
-use App\Http\Resources\Web\TeamResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use JustSteveKing\Launchpad\Http\Resources\DateResource;
@@ -13,7 +12,7 @@ use JustSteveKing\Launchpad\Http\Resources\DateResource;
 /**
  * @property-read User $resource
  */
-class UserResource extends JsonResource
+final class UserResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
