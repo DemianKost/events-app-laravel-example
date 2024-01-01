@@ -12,6 +12,6 @@ final class EventStoreController
 {
     public function __invoke(EventRequest $request): Responsable
     {
-        
+         
     }
 }

@@ -1,28 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests\Api\V1\Ingress;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EventRequest extends FormRequest
+final class EventRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', 'string', 'min:2', 'max:255'],
+            'icon' => ['nullable', 'string', 'min:2', 'max:255'],
+            'description' => ['required', 'string'],
+            'notify' => ['required', 'boolean'],
+            'tags' => ['required', 'array'],
+            'tags.*' => ['string'],
+            'meta' => ['required', 'array']
         ];
     }
 }
