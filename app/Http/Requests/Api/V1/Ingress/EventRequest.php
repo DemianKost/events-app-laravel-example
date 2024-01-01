@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Requests\Api\V1\Ingress;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 final class EventRequest extends FormRequest
 {
@@ -17,12 +18,21 @@ final class EventRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:2', 'max:255'],
-            'icon' => ['nullable', 'string', 'min:2', 'max:255'],
+            'icon' => ['required', 'string', 'min:2', 'max:255'],
             'description' => ['required', 'string'],
             'notify' => ['required', 'boolean'],
             'tags' => ['required', 'array'],
             'tags.*' => ['string'],
-            'meta' => ['required', 'array']
+            'meta' => ['nullable'],
+            'channel' => ['required', Rule::exists(
+                table: 'channels',
+                column: 'name',
+            )]
         ];
+    }
+
+    public function payload()
+    {
+
     }
 }
