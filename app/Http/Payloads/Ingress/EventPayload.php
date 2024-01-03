@@ -12,7 +12,7 @@ final readonly class EventPayload
         private readonly string $description,
         private readonly bool $notify,
         private readonly array $tags,
-        private readonly null|object $meta,
+        private readonly array $meta,
         private readonly string $channel
     ) {}
 

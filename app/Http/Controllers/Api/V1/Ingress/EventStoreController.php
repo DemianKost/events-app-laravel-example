@@ -9,7 +9,7 @@ use App\Jobs\V1\Ingress\CaptureEvent;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\Responsable;
 use JustSteveKing\Launchpad\Queue\DispatchableCommandBus;
-use Treblle\Tools\Http\Responses\MessageResponse;
+use JustSteveKing\Launchpad\Http\Responses\MessageResponse;
 
 final class EventStoreController
 {
@@ -24,7 +24,10 @@ final class EventStoreController
         ) );
 
         return new MessageResponse(
-            message: ''
+            data: [
+                'message' => 'We have accepted your request, and are processing it.'
+            ],
+            status: 202
         );
     }
 }

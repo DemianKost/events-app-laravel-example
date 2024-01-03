@@ -11,6 +11,8 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Http\Payloads\Ingress\EventPayload;
+use App\Models\Event;
+use JustSteveKing\Launchpad\Database\Portal;
 
 class CaptureEvent implements ShouldQueue
 {
@@ -23,8 +25,10 @@ class CaptureEvent implements ShouldQueue
         public readonly EventPayload $payload,
     ) {}
 
-    public function handle(): void
+    public function handle(Portal $database): void
     {
-        
+        $database->transaction(
+            callback: fn () => Event::query()->create($this->payload->toArray())
+        );
     }
 }
