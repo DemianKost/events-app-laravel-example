@@ -9,17 +9,21 @@ use Inertia\Response;
 use Inertia\ResponseFactory;
 use App\Http\Resources\Web\ProjectResource;
 use App\Queries\Projects\FetchProjectById;
+use App\Services\ReportingService;
 
 final readonly class ShowController
 {
     public function __construct(
         private readonly ResponseFactory $response,
         private FetchProjectById $query,
+        private ReportingService $service,
     ) {
     }
 
     public function __invoke(Request $request, string $ulid): Response
     {
+        dd( $this->service->projectAggregate($ulid) );
+
         return $this->response->render(
             component: 'Projects/Show',
             props: [
