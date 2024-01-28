@@ -22,8 +22,6 @@ final readonly class ShowController
 
     public function __invoke(Request $request, string $ulid): Response
     {
-        dd( $this->service->projectAggregate($ulid) );
-
         return $this->response->render(
             component: 'Projects/Show',
             props: [
