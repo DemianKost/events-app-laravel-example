@@ -22,8 +22,7 @@ final class CreateNewProject implements ShouldQueue
     public function __construct(
         public readonly string $name,
         public readonly string $team,
-    ) {
-    }
+    ) {}
 
     public function handle(Portal $database): void
     {
